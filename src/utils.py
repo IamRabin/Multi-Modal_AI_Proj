@@ -1,5 +1,14 @@
 
 import config
+import json
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras import regularizers
+from tensorflow.keras.layers import Conv1D, MaxPooling1D
+from tensorflow.keras.layers import Activation, Input, Dense, Flatten, Dropout, Embedding
+
+with open(config.vocab, "r") as voc:
+    vocab = json.load(voc)
 
 
 def create_glove_embeddings():

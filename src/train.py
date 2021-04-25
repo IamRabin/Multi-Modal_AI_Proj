@@ -1,6 +1,7 @@
 
 
 import pickle
+import os
 import json
 import numpy as np
 import pandas as pd
@@ -10,19 +11,21 @@ from tensorflow.keras.optimizers import Adadelta, Adam
 from keras.applications.densenet import DenseNet121
 from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
+from tensorflow.keras.layers import Input, Dense, Dropout, concatenate
+from tensorflow.keras import Model
 
 import cnn_model
 import config
-import utils
+from utils import *
 
 
 def run():
+
+    os.makedirs("./best_models")
     with open(config.text_data, "rb") as handle:
         text = pickle.load(handle)
     with open(config.img_data, "rb")as handle:
         img = pickle.load(handle)
-    with open(config.vocab, "r") as voc:
-        vocab = json.load(voc)
 
     original_data = pd.read_csv(config.raw_text_labels)
     ids = list(set(list(text.keys())) & set(list(img.keys())))
@@ -42,10 +45,10 @@ def run():
         print('Running iteration %i/%i' % (i+1, config.RUNS))
 
         emb_layer = None
-        if USE_GLOVE:
+        if config.USE_GLOVE:
             emb_layer = create_glove_embeddings()
 
-        model_txt = build_cnn(
+        model_txt = cnn_model.build_cnn(
             embedding_layer=emb_layer,
             num_words=config.MAX_NUM_WORDS,
             embedding_dim=config.EMBEDDING_DIM,
@@ -63,8 +66,8 @@ def run():
 
         history = model_txt.fit(
             np.array(X_train_text), np.array(y_train),
-            epochs=NB_EPOCHS,
-            batch_size=BATCH_SIZE,
+            epochs=config.NB_EPOCHS,
+            batch_size=config.BATCH_SIZE,
             verbose=1,
             validation_data=(np.array(X_test_text), np.array(y_test)),
             callbacks=[ModelCheckpoint('best_models/text_model-%i.h5' % (i+1), monitor='val_loss',
@@ -128,5 +131,5 @@ def run():
     multi_model.save_weights('best_models/multi_model-1.h5')
 
 
-if __name__ == "__main__ ":
+if __name__ == "__main__":
     run()
