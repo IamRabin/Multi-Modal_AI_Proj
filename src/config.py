@@ -21,17 +21,17 @@ vocab = "/content/drive/MyDrive/medical_multimodal_with_transfer_learning/vocab.
 raw_text_labels = "/content/drive/MyDrive/medical_multimodal_with_transfer_learning/ids_raw_texts_labels.csv"
 
 # EMBEDDING
-MAX_NUM_WORDS  = 15000
-EMBEDDING_DIM  = 300
+MAX_NUM_WORDS = 15000
+EMBEDDING_DIM = 300
 MAX_SEQ_LENGTH = 140
-USE_GLOVE      = True
+USE_GLOVE = True
 
 # MODEL
-FILTER_SIZES   = [3,4,5]
-FEATURE_MAPS   = [10,10,10]
-DROPOUT_RATE   = 0.5
+FILTER_SIZES = [3, 4, 5]
+FEATURE_MAPS = [10, 10, 10]
+DROPOUT_RATE = 0.5
 
 # LEARNING
-BATCH_SIZE     = 200
-NB_EPOCHS      = 10
-RUNS           = 1
+BATCH_SIZE = 200
+NB_EPOCHS = 10
+RUNS = 1
