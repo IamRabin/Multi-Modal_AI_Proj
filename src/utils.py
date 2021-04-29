@@ -13,7 +13,7 @@ with open(config.vocab, "r") as voc:
 
 def create_glove_embeddings():
     embeddings_index = {}
-    f = open("/content/drive/MyDrive/medical_multimodal_with_transfer_learning/new_data_embed300.txt")
+    f = open("/source/Data_preprocessed/new_data_embed300.txt")
     for line in f:
         values = line.split()
         word = values[0]

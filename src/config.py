@@ -15,10 +15,10 @@ NB_EPOCHS = 10
 RUNS = 1
 
 
-text_data = "/content/drive/MyDrive/medical_multimodal_with_transfer_learning/text_processed.pkl"
-img_data = "/content/drive/MyDrive/medical_multimodal_with_transfer_learning/x_ray_processed.pkl"
-vocab = "/content/drive/MyDrive/medical_multimodal_with_transfer_learning/vocab.json"
-raw_text_labels = "/content/drive/MyDrive/medical_multimodal_with_transfer_learning/ids_raw_texts_labels.csv"
+text_data = "/source/Data_preprocessed/text_processed.pkl"
+img_data = "/source/Data_preprocessed/x_ray_processed.pkl"
+vocab = "/source/Data_preprocessed/vocab.json"
+raw_text_labels = "/source/Data_preprocessed/ids_raw_texts_labels.csv"
 
 # EMBEDDING
 MAX_NUM_WORDS = 15000
