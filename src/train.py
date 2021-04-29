@@ -8,7 +8,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from tensorflow.keras.optimizers import Adadelta, Adam
-from keras.applications.densenet import DenseNet121
+from tensorflow.keras.applications.densenet import DenseNet121
 from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
 from tensorflow.keras.layers import Input, Dense, Dropout, concatenate
@@ -79,7 +79,7 @@ def run():
         histories.append(history.history)
 
     image_input = Input(shape=(224, 224, 3))
-    base_model = DenseNet121(include_top=True, weights='/content/drive/MyDrive/medical_multimodal_with_transfer_learning/best_models/CheXNet_Densenet121_weights.h5',
+    base_model = DenseNet121(include_top=True, weights='/source/best_models/CheXNet_Densenet121_weights.h5',
                              input_tensor=image_input, input_shape=None, pooling=None, classes=14)
     last_layer = base_model.get_layer('avg_pool').output
     x = BatchNormalization()(last_layer)
@@ -109,7 +109,7 @@ def run():
 
     # Image Sub-model
     image_input = Input(shape=(224, 224, 3))
-    base_model = DenseNet121(include_top=True, weights='/content/drive/MyDrive/medical_multimodal_with_transfer_learning/best_models/CheXNet_Densenet121_weights.h5',
+    base_model = DenseNet121(include_top=True, weights='./best_models/CheXNet_Densenet121_weights.h5',
                              input_tensor=image_input, input_shape=None, pooling=None, classes=14)
     last_layer = base_model.get_layer('avg_pool').output
     img_last_layer = BatchNormalization()(last_layer)
